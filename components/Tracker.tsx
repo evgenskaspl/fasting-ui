@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { Button } from "antd-mobile";
 import Svg, { Circle } from "react-native-svg";
+import Button from "@ant-design/react-native/lib/button";
 import Animated, {
   useSharedValue,
   useAnimatedProps,
@@ -100,15 +100,15 @@ const FastingTracker = () => {
       </View>
       <View style={styles.buttonsContainer}>
         {/* Start Button */}
-        <Button onClick={startAnimation} disabled={isRunning}>
+        <Button style={styles.button} type="ghost" onPress={startAnimation} disabled={isRunning}>
           Start
         </Button>
         {/* Stop Button */}
-        <Button onClick={stopAnimation} disabled={!isRunning}>
+        <Button style={styles.button} type="ghost" onPress={stopAnimation} disabled={!isRunning}>
           Stop
         </Button>
         {/* Reset Button */}
-        <Button onClick={resetAnimation}>Reset</Button>
+        <Button style={styles.button} type="ghost" onPress={resetAnimation}>Reset</Button>
       </View>
     </View>
   );
@@ -125,6 +125,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: "space-between",
     width: "80%",
+  },
+  button: {
+    borderColor: 'transparent',
   },
   timerContainer: {
     position: "absolute",
