@@ -1,32 +1,35 @@
 import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import Swiper from "react-native-swiper";
-import { ThemedText } from "./ThemedText";
+import { ThemedText } from "./common/ThemedText";
 import { useTheme } from "@/hooks/useTheme";
+import { useTranslation } from "react-i18next";
 
 const { width } = Dimensions.get("window");
-
-const slides = [
-  {
-    title: "Welcome to Fasting Break",
-    description:
-      "Discover how our app can help you\nachieve your fasting goals with ease.",
-  },
-  {
-    title: "Track Your Fasting",
-    description:
-      "Monitor your fasting progress easily\nand stay on track with reminders.",
-  },
-  {
-    title: "Stay Healthy",
-    description: "Achieve your health goals\nwith personalized fasting plans.",
-  },
-];
 
 const WelcomeSwiper = () => {
   const {
     theme: { colors },
   } = useTheme("text");
+  const { t } = useTranslation();
+
+  const slides = [
+    {
+      title: t("welcome"),
+      description: t("welcom_descritpion_slide_1"),
+    },
+    {
+      title: "Track Your Fasting",
+      description:
+        "Monitor your fasting progress easily\nand stay on track with reminders.",
+    },
+    {
+      title: "Stay Healthy",
+      description:
+        "Achieve your health goals\nwith personalized fasting plans.",
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <Swiper
