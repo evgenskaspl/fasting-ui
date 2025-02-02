@@ -18,6 +18,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  console.log('colorScheme', colorScheme)
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     antoutline: require("@ant-design/icons-react-native/fonts/antoutline.ttf"),
