@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import React from "react";
+import { View, StyleSheet, Dimensions } from "react-native";
 import Swiper from "react-native-swiper";
+import { ThemedText } from "./ThemedText";
+import { useTheme } from "@/hooks/useTheme";
 
 const { width } = Dimensions.get("window");
 
@@ -22,19 +24,26 @@ const slides = [
 ];
 
 const WelcomeSwiper = () => {
+  const {
+    theme: { colors },
+  } = useTheme("text");
   return (
     <View style={styles.container}>
       <Swiper
         showsPagination={true}
-        dotColor="#D8D8D8"
-        activeDotColor="#FF7700"
+        dotColor={colors.dot}
+        activeDotColor={colors.activeDot}
         autoplayTimeout={4}
         autoplay
       >
         {slides.map((slide, index) => (
           <View key={index} style={styles.slide}>
-            <Text style={styles.title}>{slide.title}</Text>
-            <Text style={styles.description}>{slide.description}</Text>
+            <ThemedText type="title" style={styles.title}>
+              {slide.title}
+            </ThemedText>
+            <ThemedText type="default" style={styles.description}>
+              {slide.description}
+            </ThemedText>
           </View>
         ))}
       </Swiper>
@@ -54,13 +63,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#1D1D1D",
     marginTop: 50,
     textAlign: "center",
   },
   description: {
     fontSize: 14,
-    color: "#8E8E93",
     textAlign: "center",
     marginTop: 10,
   },

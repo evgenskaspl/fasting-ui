@@ -1,18 +1,22 @@
 import WelcomeSwiper from "@/components/WelcomeSwiper";
+import { useTheme } from "@/hooks/useTheme";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-// import { useNavigation } from "react-native/native";
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
+  const {
+    theme: { colors },
+    toggleTheme,
+  } = useTheme();
 
   useEffect(() => {
-    navigation.setOptions({ headerShown: false }); // Hides the top header
+    navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.imageContainer}>
         <Image
           source={require("@/assets/images/welcom_bg.png")}
@@ -24,11 +28,16 @@ const WelcomeScreen = () => {
           resizeMode="contain"
         />
       </View>
-      <View style={styles.content}>
+      <View style={[styles.content, { backgroundColor: colors.background }]}>
         <WelcomeSwiper />
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Get started</Text>
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: colors.buttonBg }]}
+            onPress={toggleTheme}
+          >
+            <Text style={[styles.buttonText, { color: colors.buttonText }]}>
+              Get started
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -39,14 +48,12 @@ const WelcomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#2F432D",
     justifyContent: "center",
   },
   content: {
     flex: 1,
     alignItems: "center",
     paddingHorizontal: 20,
-    backgroundColor: "#FFF",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     justifyContent: "flex-start",
@@ -66,7 +73,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: "#20C997",
     paddingVertical: 15,
     paddingHorizontal: 60,
     borderRadius: 10,
@@ -74,7 +80,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    color: "#000",
   },
 });
 
